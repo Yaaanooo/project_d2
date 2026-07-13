@@ -1,0 +1,52 @@
+<%= stylesheet_link_tag "top", "data-turbo-track": "reload" %>
+
+<div class="top-container">
+
+  <%= form_with url: game_quiz_path, method: :get, local: true do %>
+    <div class="genre-select">
+
+    <% genre1 = @genre&.genre1_area.presence || "ジャンル1" %>
+    <% genre2 = @genre&.genre2_area.presence || "ジャンル2" %>
+    <% genre3 = @genre&.genre3_area.presence || "ジャンル3" %>
+    <% genre4 = @genre&.genre4_area.presence || "ジャンル4" %>
+    <% genre5 = @genre&.genre5_area.presence || "ジャンル5" %>
+
+    <%= radio_button_tag :genre, genre1, true, class: "genre-radio", id: "genre_1" %>
+    <%= label_tag :genre_1, genre1, class: "genre-button" %>
+
+    <%= radio_button_tag :genre, genre2, false, class: "genre-radio", id: "genre_2" %>
+    <%= label_tag :genre_2, genre2, class: "genre-button" %>
+
+    <%= radio_button_tag :genre, genre3, false, class: "genre-radio", id: "genre_3" %>
+    <%= label_tag :genre_3, genre3, class: "genre-button" %>
+
+    <%= radio_button_tag :genre, genre4, false, class: "genre-radio", id: "genre_4" %>
+    <%= label_tag :genre_4, genre4, class: "genre-button" %>
+
+    <%= radio_button_tag :genre, genre5, false, class: "genre-radio", id: "genre_5" %>
+    <%= label_tag :genre_5, genre5, class: "genre-button" %>
+
+    </div>
+
+
+    <div class="question-select">
+
+        <%= radio_button_tag :question_count, 5, true, class: "question-radio" %>
+        <%= label_tag :question_count_5, "5問", class: "question-button" %>
+
+        <%= radio_button_tag :question_count, 10, false, class: "question-radio" %>
+        <%= label_tag :question_count_10, "10問", class: "question-button" %>
+
+        <%= radio_button_tag :question_count, 20, false, class: "question-radio" %>
+        <%= label_tag :question_count_20, "20問", class: "question-button" %>
+
+    </div>
+
+
+    <div class="start-button">
+      <%= submit_tag "スタート" %>
+    </div>
+
+  <% end %>
+
+</div>
