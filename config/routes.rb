@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  get 'admins/list'
+  get 'admins/new'
+# TOPとジャンル
+  get  "admins/genre", to: "admins#genre"
+  patch "admins/genre", to: "admins#update_genre"
+
+  root 'games#top'
+  get "games/quiz", to: "games#quiz", as: :game_quiz
+  get 'games/result'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
