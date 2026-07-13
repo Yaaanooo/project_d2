@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+開発基礎チームD
+クイズの作成
 
-Things you may want to cover:
+* OKADA
 
-* Ruby version
+* KAWAI
 
-* System dependencies
+* TOJO
 
-* Configuration
+* MISHIMA
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* YANO
