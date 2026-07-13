@@ -1,20 +1,23 @@
-<div class="result-container">
+<div class = "result-page">
 
-  <div class="genre-box">
-    <h1>ジャンル名</h1>
+  <div class="result-container">
+
+    <div class="genre-box">
+      <h1><%= @genre %></h1>
+    </div>
+
+    <div class="score-box">
+      <h2>正解数 <%= @score %> / <%= @total %></h2>
+    </div>
+
+    <div class="comment-box">
+      <p><%= @comment %></p>
+    </div>
+
+    <div class="button-area">
+      <%= button_to "リトライ", game_quiz_path, method: :get %>
+      <%= button_to "トップへ", root_path, method: :get %>
+    </div>
+
   </div>
-
-  <div class="score-box">
-    <h2>正解数 3 / 5</h2>
-  </div>
-
-  <div class="comment-box">
-    <p>コメント</p>
-  </div>
-
-  <div class="button-area">
-    <%= button_to "リトライ", game_quiz_path, method: :get %>
-    <%= button_to "トップへ", root_path, method: :get %>
-  </div>
-
-</div>
+<div>

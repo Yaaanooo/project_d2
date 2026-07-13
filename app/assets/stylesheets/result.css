@@ -5,33 +5,40 @@
     border: 2px solid black;
 }
 
+/* 結果画面全体 */
+.result-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 60px;
+}
+
 /* 全体 */
 .result-container {
-    width: 80%;
-    margin: 50px auto;
+    width: 90%;
+    max-width: 900px;
     text-align: center;
 }
 
 /* ジャンル */
 .genre-box {
     width: 70%;
-    margin: 30px auto;
-    padding: 20px 0;
+    margin: 20px auto;
+    padding: 15px 0;
 }
 
 /* 正解数 */
 .score-box {
     width: 40%;
-    margin: 30px auto;
-    padding: 20px 0;
+    margin: 20px auto;
+    padding: 15px 0;
 }
-
 /* コメント */
 .comment-box {
     width: 80%;
-    height: 250px;
-    margin: 30px auto;
-
+    height: 180px;
+    margin: 20px auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,8 +48,8 @@
 .button-area {
     display: flex;
     justify-content: center;
-    gap: 80px;
-    margin-top: 30px;
+    gap: 60px;
+    margin-top: 20px;
 }
 
 .button-area form {
@@ -57,4 +64,9 @@
     cursor: pointer;
     font-weight: bold;
     border-radius: 8px;
+}
+.genre-box h1,
+.score-box h2,
+.comment-box p {
+    margin: 10px 0;
 }
