@@ -1,0 +1,60 @@
+/* 共通 */
+.genre-box,
+.score-box,
+.comment-box {
+    border: 2px solid black;
+}
+
+/* 全体 */
+.result-container {
+    width: 80%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+/* ジャンル */
+.genre-box {
+    width: 70%;
+    margin: 30px auto;
+    padding: 20px 0;
+}
+
+/* 正解数 */
+.score-box {
+    width: 40%;
+    margin: 30px auto;
+    padding: 20px 0;
+}
+
+/* コメント */
+.comment-box {
+    width: 80%;
+    height: 250px;
+    margin: 30px auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ボタン */
+.button-area {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 30px;
+}
+
+.button-area form {
+    display: inline-block;
+}
+
+.button-area input,
+.button-area button {
+    width: 220px;
+    height: 70px;
+    font-size: 24px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 8px;
+}

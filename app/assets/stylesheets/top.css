@@ -1,0 +1,109 @@
+/* TOP画面全体 */
+.top-container {
+  width: 500px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+/* ジャンル選択 */
+/* ジャンルを横並び */
+.genre-select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+
+  width: 100%;
+  margin: 60px auto;
+}
+
+/* 元のラジオボタンを非表示 */
+.genre-radio {
+  display: none;
+}
+
+/* ジャンルボタン */
+.genre-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 160px;
+  height: 90px;
+
+  border: 3px solid #333;
+  border-radius: 12px;
+
+  background: white;
+
+  font-size: 24px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+/* マウスを乗せたとき */
+.genre-button:hover {
+  background: #eeeeee;
+}
+
+/* 選択中 */
+.genre-radio:checked + .genre-button {
+  background: #333;
+  color: white;
+}
+
+/* 問題数選択 */
+.question-select {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px 0;
+}
+/* 本来のラジオボタンを非表示 */
+.question-radio {
+  display: none;
+}
+
+/* ボタンの見た目 */
+.question-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100px;
+  height: 60px;
+
+  border: 2px solid #333;
+  border-radius: 8px;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  background: white;
+  cursor: pointer;
+}
+
+/* マウスを乗せたとき */
+.question-button:hover {
+  background: #eeeeee;
+}
+
+/* 選択されたボタン */
+.question-radio:checked + .question-button {
+  background: #333;
+  color: white;
+}
+
+/* スタートボタン */
+.start-button {
+  margin-top: 30px;
+}
+
+.start-button input {
+  padding: 12px 50px;
+  font-size: 18px;
+  cursor: pointer;
+}
