@@ -1,5 +1,13 @@
 class AdminsController < ApplicationController
   def list
+  @results=Question.all
+  @genres=Genre.all
+  end
+  def search
+  @genres=Genre.all
+  query = params[:query]
+  @results = Question.where("body LIKE ?", "%#{query}%").where(id: params[:sGenres]||[])
+  render :list
   end
 
   def new

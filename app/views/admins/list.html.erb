@@ -1,2 +1,125 @@
-<h1>Admin#list</h1>
-<p>Find me in app/views/admin/list.html.erb</p>
+<style>
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.addBtn{
+border:2px;
+background-color: #007bff;
+text-align:center;
+color:white;
+font-size:2vw;
+border-radius: 5px;
+position: absolute;
+top: 10px;
+left: 1vw;
+width: 14vw;
+height: 5vw;
+}
+th{
+background-color:#163E64;
+color:white;
+}
+.sBtn{
+border:2px;
+background-color:#007bff;
+text-align:center;
+color:white;
+font-size:2vw;
+border-radius:5px;
+position:absolute;
+top:10px;
+left:89vw;
+width:10vw;
+height:5vw;
+}
+.sText{
+  position:absolute;
+  top:2.5vw;
+  left:16vw;
+  width:71vw;
+  height:2.5vw;
+}
+.listTable{
+  border-collapse:collapse;
+  position:absolute;
+  top:11vw;
+  left:1vw;
+  width:98vw;
+}
+th,td{
+  border:1px solid #000000;
+}
+.notFound{
+  text-align:center;
+}
+._id{
+  width:7vw;
+}
+._genre{
+  width:7vw;
+}
+._body{
+  width:77vw;
+}
+._eBtn{
+  width:7vw;
+}
+.gBtn{
+  position:relative;
+  left:-18vw;
+}
+.gLbl{
+  position:relative;
+  left:-18vw;
+  width:7vw;
+  height: 5vw;
+  text-align:center;
+  border:2px;
+  background-color:#cccccc;
+  border-radius:5px;
+}
+</style>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="container">
+<a href="admins/new"><button class="addBtn" >問題追加</button></a>
+<%= form_with url: search_path, method: :get, local: true do |f| %>
+  <div><%= f.text_field :query, placeholder: "問題文検索" , class:"sText"%></div>
+  <% @genres.each do |g|%>
+    <div style="position:absolute;top:6vw;left:calc(<%=g.id%>*19vw)">
+    <%=check_box_tag "sGenres[]",g.id,true,id: g.id,class:"gBtn"%>
+    <%=label_tag g.id,g.genre_name,class:"gLbl"%>
+    </div>
+  <%end%>
+  <div><%= f.submit "検索" , class:"sBtn" %></div>
+<% end %>
+
+<table class="listTable">
+<tr>
+<th class="_id">ID</th>
+<th class="_genre">ジャンル</th>
+<th class="_body" colspan="2">問題文</th>
+</tr>
+<% if @results.present? %>
+<% @results.each do |result|%>
+<tr>
+<td class="_id"><%=result.id%></td>
+<td class="_genre"><%=Genre.find(result.genre_id).genre_name%></td>
+<td class="_body"><%=result.body%></td>
+<td class="_eBtn"><a href="?=<%=result.id%>">編集</a></td>
+</tr>
+<%end%>
+<%else%>
+<td colspan="3" class="notFound">該当する結果が見つかりませんでした</td>
+<%end%>
+</table>
+</div>
+</body>
+
+<!--comment-->
+<!-- rails g model Genre genre_name:string -->
+<!-- rails g model Question genre_id:integer body:string correct_answer:string wrong_answer_1~3:string -->
