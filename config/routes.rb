@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'admins/list'
   get 'admins/new'
+  post 'admins/search'
+  get 'search',to: 'admins#search'
 # TOPとジャンル
   get  "admins/genre", to: "admins#genre"
   patch "admins/genre", to: "admins#update_genre"
