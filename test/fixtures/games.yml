@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  question_id: 1
+  question_number: 1
+  f_correct_answer: 1
+  f_wrong_answer_1: 1
+  f_wrong_answer_2: 1
+  f_wrong_answer_3: 1
+  f_user_answer: 1
+
+two:
+  question_id: 1
+  question_number: 1
+  f_correct_answer: 1
+  f_wrong_answer_1: 1
+  f_wrong_answer_2: 1
+  f_wrong_answer_3: 1
+  f_user_answer: 1
