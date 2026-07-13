@@ -1,0 +1,32 @@
+<%= stylesheet_link_tag "genre", "data-turbo-track": "reload" %>
+
+<%= form_with model: @genre, url: "/admins/genre", method: :patch do |f| %>
+  <div class="genre-field">
+    <%= f.label :genre1_area %>
+    <%= f.text_field :genre1_area %>
+  </div>
+
+  <div class="genre-field">
+  <%= f.label :genre2_area %>
+  <%= f.text_field :genre2_area %>
+  </div>
+
+  <div class="genre-field">
+  <%= f.label :genre3_area %>
+  <%= f.text_field :genre3_area %>
+  </div>
+
+  <div class="genre-field">
+  <%= f.label :genre4_area %>
+  <%= f.text_field :genre4_area %>
+  </div>
+
+  <div class="genre-field">
+  <%= f.label :genre5_area %>
+  <%= f.text_field :genre5_area %>
+  </div>
+
+  <div>
+  <%= f.submit "登録" %>
+  </div>
+<% end %>
