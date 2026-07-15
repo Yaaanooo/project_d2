@@ -68,19 +68,51 @@ th,td{
 }
 .gBtn{
   position:relative;
+  top:-100vw;
   left:-18vw;
 }
-.gLbl{
+.layout-a{
   position:relative;
+  top:-15px;
   left:-18vw;
   width:7vw;
-  height: 5vw;
+  height: 4vw;
+  text-align:center;
+  border:2px;
+  background-color:#888888;
+  border-radius:5px;
+}
+.layout-b{
+  position:relative;
+  top:-15px;
+  left:-18vw;
+  width:7vw;
+  height: 4vw;
   text-align:center;
   border:2px;
   background-color:#cccccc;
   border-radius:5px;
 }
 </style>
+<%= javascript_tag do %>
+  document.addEventListener("turbo:load", ChkBoxFunc,{once:true});
+  function ChkBoxFunc() {
+  <%@genres.each do |g|%>
+    const checkbox = document.getElementById(<%=g.id%>);
+    const content = document.getElementById("gLbl");
+
+    checkbox.addEventListener("change", function() {
+      if (this.checked) {
+        content.classList.remove("layout-a");
+        content.classList.add("layout-b");
+      } else {
+        content.classList.remove("layout-b");
+        content.classList.add("layout-a");
+      }
+    },false);
+  <%end%>
+  }
+<% end %>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -92,7 +124,7 @@ th,td{
   <% @genres.each do |g|%>
     <div style="position:absolute;top:6vw;left:calc(<%=g.id%>*19vw)">
     <%=check_box_tag "sGenres[]",g.id,true,id: g.id,class:"gBtn"%>
-    <%=label_tag g.id,g.genre_name,class:"gLbl"%>
+    <label for=<%=g.id%>><div id="gLbl" class="layout-b"><%=g.genre_name%></div></label>
     </div>
   <%end%>
   <div><%= f.submit "検索" , class:"sBtn" %></div>
