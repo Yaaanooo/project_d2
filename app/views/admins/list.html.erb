@@ -142,7 +142,7 @@ th,td{
 <td class="_id"><%=result.id%></td>
 <td class="_genre"><%=Genre.find(result.genre_id).genre_name%></td>
 <td class="_body"><%=result.body%></td>
-<td class="_eBtn"><a href="?=<%=result.id%>">編集</a></td>
+<td class="_eBtn"><a href="/admins/new?id=<%=result.id%>">編集</a></td>
 </tr>
 <%end%>
 <%else%>
