@@ -34,14 +34,36 @@
   border: 3px solid #333;
   border-radius: 12px;
 
-  background: white;
-
   font-size: 24px;
   font-weight: bold;
 
   cursor: pointer;
 
   transition: 0.2s;
+}
+/* 1 */
+.genre-radio:nth-of-type(1) + .genre-button {
+  background: #3498db;
+}
+
+/* 2 */
+.genre-radio:nth-of-type(2) + .genre-button {
+  background: #2ecc71;
+}
+
+/* 3 */
+.genre-radio:nth-of-type(3) + .genre-button {
+  background: #f39c12;
+}
+
+/* 4 */
+.genre-radio:nth-of-type(4) + .genre-button {
+  background: #e74c3c;
+}
+
+/* 5 */
+.genre-radio:nth-of-type(5) + .genre-button {
+  background: #9b59b6;
 }
 
 /* マウスを乗せたとき */
@@ -51,8 +73,9 @@
 
 /* 選択中 */
 .genre-radio:checked + .genre-button {
-  background: #333;
-  color: white;
+  border: 5px solid #000;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  transform: scale(1.05);
 }
 
 /* 問題数選択 */
