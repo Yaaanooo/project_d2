@@ -1,41 +1,42 @@
 <%= form_with model: @new_table, url: "/admins", method: :post, local: true do |f| %>
 
   <div class="genre-area">
-        <label class="genre-label">ジャンル名</label>
-        <%= f.collection_select :genre_id, @genre_tables, :id, :genre_name, { prompt: "選択してください" }, { class: "genre-select" } %>  </div>
+    <label class="genre-label">ジャンル名</label>
+    <%= f.collection_select :genre_id, @genre_tables, :id, :genre_name, { prompt: "選択してください" }, { class: "genre-select", required: true } %>
+  </div>
 
   <div class="question-area">
-        <h2 class="question-title">問題文</h2>
-        <%= f.text_area :body, placeholder: "問題文を入力", class: "question-input" %>
+    <h2 class="question-title">問題文</h2>
+    <%= f.text_area :body, placeholder: "問題文を入力", class: "question-input", required: true %>
   </div>
 
   <div class="choices-container">
     
-        <div class="choice-field correct-field">
-            <div class="choice-label correct-title">選択肢（正解）</div>
-            <%= f.text_field :correct_answer, placeholder: "正解を入力", class: "choice-input" %>
-        </div>
-
-    <div class="choice-field">
-        <div class="choice-label">選択肢</div>
-        <%= f.text_field :wrong_answer_1, placeholder: "誤答を入力", class: "choice-input" %>
+    <div class="choice-field correct-field">
+      <div class="choice-label correct-title">選択肢（正解）</div>
+      <%= f.text_field :correct_answer, placeholder: "正解を入力", class: "choice-input", required: true %>
     </div>
 
     <div class="choice-field">
-        <div class="choice-label">選択肢</div>
-        <%= f.text_field :wrong_answer_2, placeholder: "誤答を入力", class: "choice-input" %>
+      <div class="choice-label">選択肢</div>
+      <%= f.text_field :wrong_answer_1, placeholder: "誤答を入力", class: "choice-input", required: true %>
     </div>
 
     <div class="choice-field">
-        <div class="choice-label">選択肢</div>
-        <%= f.text_field :wrong_answer_3, placeholder: "誤答を入力", class: "choice-input" %>
+      <div class="choice-label">選択肢</div>
+      <%= f.text_field :wrong_answer_2, placeholder: "誤答を入力", class: "choice-input", required: true %>
+    </div>
+
+    <div class="choice-field">
+      <div class="choice-label">選択肢</div>
+      <%= f.text_field :wrong_answer_3, placeholder: "誤答を入力", class: "choice-input", required: true %>
     </div>
 
   </div>
 
   <div class="buttons-area">
-        <%= f.submit "保存", class: "btn btn-save" %>
-        <%= link_to "削除", "#", onclick: "window.location.reload(); return false;", class: "btn btn-delete" %>
+    <%= f.submit "保存", class: "btn btn-save" %>
+    <%= link_to "削除", "#", onclick: "window.location.reload(); return false;", class: "btn btn-delete" %>
   </div>
 
 <% end %>
