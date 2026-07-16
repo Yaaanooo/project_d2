@@ -9,15 +9,26 @@ class GamesController < ApplicationController
 
     questions = Question.where(genre_id: genre_id).sample(question_count)
 
-    # if questions.empty?
-    #   redirect_to root_path, alert: "問題が登録されていません"
-    #   return
-    # end
+    if questions.empty?
+      redirect_to root_path, alert: "問題が登録されていません"
+      return
+    end
 
-    session[:question_ids] = question.map(&:id)
+    session[:question_ids] = questions.map(&:id)
     session[:question_index] = 0
     session[:correct_count] = 0
     session[:answers] = {}
+
+    session[:choices] = {}
+
+    questions.each do |question|
+      session[:choices][question.id.to_s] = [
+        question.correct_answer,
+        question.wrong_answer_1,
+        question.wrong_answer_2,
+        question.wrong_answer_3
+      ].shuffle
+    end
 
     redirect_to game_quiz_path
   end
@@ -40,14 +51,14 @@ class GamesController < ApplicationController
     @question = Question.find_by(id: question_id)
 
     unless @question
-      reset_quiz_session
       redirect_to root_path, alert: "問題データを取得できませんでした"
       return
     end
 
     @question_number = session[:question_index] + 1
 
-    @choices = [@question.correct_answer, @question.wrong_answer_1, @question.wrong_answer_2, @question.wrong_answer_3].shuffle
+    @choices = session[:choices][@question.id.to_s]
+
   end
 
   # 次へボタン
