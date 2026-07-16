@@ -1,2 +1,33 @@
-<h1>Game#quiz</h1>
-<p>Find me in app/views/game/quiz.html.erb</p>
+<div class="quiz-container">
+
+  <div class="question-text">
+    <div class="question-head">
+
+      <div class="number-text">
+        問<%= @game&.question_number || "〇" %>
+      </div>
+
+      <div class="genre-text">
+        <%= @question&.genre&.genre_name || "ジャンル名" %>
+      </div>
+
+    </div>
+
+    <div class="question-body">
+      <%= @question&.body || "ここに問題文が入ります" %>
+    </div>
+  </div>
+
+  <div class="answer-buttons">
+    <button type="button" class="answer-button">選択肢1</button>
+    <button type="button" class="answer-button">選択肢2</button>
+    <button type="button" class="answer-button">選択肢3</button>
+    <button type="button" class="answer-button">選択肢4</button>
+  </div>
+
+  <div class="page-buttons">
+    <button type="button" class="page-button">&lt; 前の問題</button>
+    <button type="button" class="page-button">次の問題 &gt;</button>
+  </div>
+
+</div>
