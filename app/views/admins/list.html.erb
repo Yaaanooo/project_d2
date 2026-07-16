@@ -118,7 +118,7 @@ th,td{
 </head>
 <body>
 <div class="container">
-<a href="admins/new"><button class="addBtn" >問題追加</button></a>
+<a href="/admins/new"><button class="addBtn" >問題追加</button></a>
 <%= form_with url: search_path, method: :get, local: true do |f| %>
   <div><%= f.text_field :query, placeholder: "問題文検索" , class:"sText"%></div>
   <% @genres.each do |g|%>
