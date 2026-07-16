@@ -1,32 +1,30 @@
 <%= stylesheet_link_tag "genre", "data-turbo-track": "reload" %>
 
-<%= form_with model: @genre, url: "/admins/genre", method: :patch do |f| %>
-  <div class="genre-field">
-    <%= f.label :genre1_area %>
-    <%= f.text_field :genre1_area %>
-  </div>
+<div class="genre-form">
 
-  <div class="genre-field">
-  <%= f.label :genre2_area %>
-  <%= f.text_field :genre2_area %>
-  </div>
+  <h1>ジャンル登録</h1>
 
-  <div class="genre-field">
-  <%= f.label :genre3_area %>
-  <%= f.text_field :genre3_area %>
-  </div>
+  <%= form_with url: admin_update_genre_path,
+                method: :patch,
+                local: true do %>
 
-  <div class="genre-field">
-  <%= f.label :genre4_area %>
-  <%= f.text_field :genre4_area %>
-  </div>
+    <% 5.times do |index| %>
+      <% genre = @genres[index] %>
 
-  <div class="genre-field">
-  <%= f.label :genre5_area %>
-  <%= f.text_field :genre5_area %>
-  </div>
+      <div class="genre-field">
+        <%= label_tag "genre_names_#{index}", "ジャンル#{index + 1}" %>
 
-  <div>
-  <%= f.submit "登録" %>
-  </div>
-<% end %>
+        <%= text_field_tag "genre_names[]",
+                           genre&.genre_name,
+                           id: "genre_names_#{index}" %>
+      </div>
+    <% end %>
+    
+
+    <div class="genre-submit">
+      <%= submit_tag "登録" %>
+    </div>
+
+  <% end %>
+
+</div>
