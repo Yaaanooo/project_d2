@@ -26,6 +26,11 @@ Rails.application.routes.draw do
   get 'games/result'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  #quiz画面
+  post "games/next", to: "games#next", as: :game_next
+  post "games/back", to: "games#back", as: :game_back
+
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

@@ -4,7 +4,7 @@
     <div class="question-head">
 
       <div class="number-text">
-        問<%= @game&.question_number || "〇" %>
+         問<%= @question_number %>
       </div>
 
       <div class="genre-text">
@@ -18,16 +18,21 @@
     </div>
   </div>
 
-  <div class="answer-buttons">
-    <button type="button" class="answer-button">選択肢1</button>
-    <button type="button" class="answer-button">選択肢2</button>
-    <button type="button" class="answer-button">選択肢3</button>
-    <button type="button" class="answer-button">選択肢4</button>
-  </div>
 
-  <div class="page-buttons">
-    <button type="button" class="page-button">&lt; 前の問題</button>
-    <button type="button" class="page-button">次の問題 &gt;</button>
-  </div>
+  <%= form_with url: game_next_path, method: :post do |form| %>
+    <div class="answer-buttons">
+      <% @choices.each do |choice| %>
+        <label class="answer-button">
+          <%= form.radio_button :user_answer, choice %>
+          <%= choice %>
+        </label>
+      <% end %>
+    </div>
 
+    <div class="page-buttons">
+      <%= form.submit "次の問題 ＞", class: "page-button" %>
+    </div>
+  <% end %>
+
+  <%= button_to "＜ 前の問題", game_back_path, method: :post, class: "page-button" %>
 </div>
