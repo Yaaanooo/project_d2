@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 # TOPとジャンル
   get "admins/genre", to: "admins#genre", as: :admin_genre
 
+  post "games/start", to: "games#start",as: :game_start
+
   patch "admins/genre", #既存データの更新
       to: "admins#update_genre",
       as: :admin_update_genre

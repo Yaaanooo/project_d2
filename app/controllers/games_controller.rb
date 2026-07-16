@@ -3,7 +3,24 @@ class GamesController < ApplicationController
     @genres = Genre.all
   end
 
+  def start
+    genre_id = params[:genre_id]
+    question_count = params[:question_count].to_i
 
+    questions = Question.where(genre_id: genre_id).sample(question_count)
+
+    # if questions.empty?
+    #   redirect_to root_path, alert: "問題が登録されていません"
+    #   return
+    # end
+
+    session[:question_ids] = question.map(&:id)
+    session[:question_index] = 0
+    session[:correct_count] = 0
+    session[:answers] = {}
+
+    redirect_to game_quiz_path
+  end
 
 
 
@@ -13,10 +30,6 @@ class GamesController < ApplicationController
       redirect_to root_path, alert: "問題が登録されていません"
       return
     end
-
-    session[:question_ids] ||= Question.all.sample(5).map(&:id)
-    session[:question_index] ||= 0
-    session[:correct_count] ||= 0
 
     if session[:question_index] >= session[:question_ids].length
       redirect_to games_result_path
