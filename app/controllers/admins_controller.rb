@@ -14,6 +14,31 @@ class AdminsController < ApplicationController
     @new_table = Question.new
     @genre_tables = Genre.all
   end
+# new
+
+def create
+    @new_table = Question.new(question_params)
+
+    if @new_table.save
+      redirect_to admins_list_path, notice: "新しい問題を追加しました！"
+    else
+      @genre_tables = Genre.all
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  private
+  def question_params
+    # @new_table (Questionモデル) のフォームから送られてくるパラメータを許可する
+    params.require(:question).permit(
+      :genre_id, 
+      :body, 
+      :correct_answer, 
+      :wrong_answer_1, 
+      :wrong_answer_2, 
+      :wrong_answer_3
+    )
+  end
 
 # TOP画面とジャンル関連
   # def genre

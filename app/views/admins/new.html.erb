@@ -2,8 +2,7 @@
 
   <div class="genre-area">
         <label class="genre-label">ジャンル名</label>
-        <%= f.collection_select :genre_id, @genre_tables, :genre_id, :genre_name, { prompt: "選択してください" }, { class: "genre-select" } %>
-  </div>
+        <%= f.collection_select :genre_id, @genre_tables, :id, :genre_name, { prompt: "選択してください" }, { class: "genre-select" } %>  </div>
 
   <div class="question-area">
         <h2 class="question-title">問題文</h2>
