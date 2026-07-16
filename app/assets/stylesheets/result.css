@@ -5,6 +5,7 @@
     border: 2px solid black;
 }
 
+
 /* 結果画面全体 */
 .result-page {
     min-height: 100vh;
@@ -14,12 +15,25 @@
     padding-top: 60px;
 }
 
-/* 全体 */
+
+/* 結果画面コンテナ */
 .result-container {
     width: 90%;
     max-width: 900px;
     text-align: center;
 }
+
+
+/* タイトル */
+.result-title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 4px solid black;
+    display: inline-block;
+}
+
 
 /* ジャンル */
 .genre-box {
@@ -28,23 +42,42 @@
     padding: 15px 0;
 }
 
+
 /* 正解数 */
 .score-box {
     width: 40%;
     margin: 20px auto;
     padding: 15px 0;
 }
+
+
 /* コメント */
 .comment-box {
     width: 80%;
-    height: 180px;
+    min-height: 180px;
+
     margin: 20px auto;
+    padding: 20px;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
+    box-sizing: border-box;
 }
 
-/* ボタン */
+
+/* コメント文章 */
+.comment-box p {
+    margin: 10px 0;
+
+    font-size: 20px;
+    line-height: 1.6;
+
+    word-break: break-word;
+}
+
+/* ボタンエリア */
 .button-area {
     display: flex;
     justify-content: center;
@@ -52,20 +85,41 @@
     margin-top: 20px;
 }
 
+
+/* ボタンのフォーム設定 */
 .button-area form {
     display: inline-block;
 }
 
-.button-area input,
-.button-area button {
+
+/* 結果画面ボタン共通 */
+.result-button {
     width: 220px;
     height: 70px;
+
     font-size: 24px;
-    cursor: pointer;
     font-weight: bold;
+
+    cursor: pointer;
     border-radius: 8px;
+
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+
+    transition: 0.2s;
 }
-.genre-box h1,
+
+
+/* ボタンホバー */
+.result-button:hover {
+    background-color: black;
+    color: white;
+}
+
+
+/* 文字の余白 */
+.genre-box h2,
 .score-box h2,
 .comment-box p {
     margin: 10px 0;
