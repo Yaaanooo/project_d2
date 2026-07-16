@@ -4,10 +4,15 @@ Rails.application.routes.draw do
   post 'admins/search'
   get 'search',to: 'admins#search'
 # TOPとジャンル
-  get  "admins/genre", to: "admins#genre"
-  patch "admins/genre", to: "admins#update_genre"
+  get "admins/genre", to: "admins#genre", as: :admin_genre
+
+  patch "admins/genre", #既存データの更新
+      to: "admins#update_genre",
+      as: :admin_update_genre
+  # post "admins/crerate"
 
   root 'games#top'
+  get "games/top"
   get "games/quiz", to: "games#quiz", as: :game_quiz
   get 'games/result'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
