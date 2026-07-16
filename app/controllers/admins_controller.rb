@@ -27,18 +27,7 @@ def create
     end
   end
 
-  private
-  def question_params
-    # @new_table (Questionモデル) のフォームから送られてくるパラメータを許可する
-    params.require(:question).permit(
-      :genre_id, 
-      :body, 
-      :correct_answer, 
-      :wrong_answer_1, 
-      :wrong_answer_2, 
-      :wrong_answer_3
-    )
-  end
+ 
 
 # TOP画面とジャンル関連
   # def genre
@@ -86,6 +75,19 @@ def create
     @genres = Genre.order(:id).limit(5)
     flash.now[:alert] = "ジャンルを登録できませんでした"
     render :genre, status: :unprocessable_entity
+  end
+  
+   private
+  def question_params
+    # @new_table (Questionモデル) のフォームから送られてくるパラメータを許可する
+    params.require(:question).permit(
+      :genre_id, 
+      :body, 
+      :correct_answer, 
+      :wrong_answer_1, 
+      :wrong_answer_2, 
+      :wrong_answer_3
+    )
   end
 end
 
