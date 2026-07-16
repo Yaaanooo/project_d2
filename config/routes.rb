@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   get 'admins/list'
   get 'admins/new'
+#new
+  post 'admins', to: 'admins#create'
+  get 'admins/:id/edit', to: 'admins#edit', as: 'edit_admin'
+  patch 'admins/:id', to: 'admins#update', as: 'update_admin'
+
   post 'admins/search'
   get 'search',to: 'admins#search'
 # TOPとジャンル
