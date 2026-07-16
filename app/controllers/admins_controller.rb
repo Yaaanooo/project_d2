@@ -54,6 +54,7 @@ class AdminsController < ApplicationController
         end
       end
     end
+  
 
     redirect_to games_top_path, notice: "ジャンルを登録しました"
   rescue ActiveRecord::RecordInvalid
