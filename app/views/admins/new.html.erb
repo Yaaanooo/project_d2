@@ -1,4 +1,27 @@
-<%= form_with model: @new_table, url: "/admins", method: :post, local: true do |f| %>
+<%
+  # 新規か編集かで、送信先URLとメソッドを自動で切り替える
+  if @new_table.new_record?
+    submit_url = '/admins'
+    submit_method = :post
+  else
+    submit_url = update_admin_path(@new_table.id)
+    submit_method = :patch
+  end
+%>
+
+<%= form_with model: @new_table, url: submit_url, method: submit_method, local: true do |f| %>
+
+  <%# エラー表示用 %>
+  <% if @new_table.errors.any? %>
+    <div style="color: red; margin: 10px 0; background: #fee; padding: 10px; border-radius: 5px;">
+      <b>保存できませんでした：</b>
+      <ul>
+        <% @new_table.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <div class="genre-area">
     <label class="genre-label">ジャンル名</label>
@@ -11,7 +34,6 @@
   </div>
 
   <div class="choices-container">
-    
     <div class="choice-field correct-field">
       <div class="choice-label correct-title">選択肢（正解）</div>
       <%= f.text_field :correct_answer, placeholder: "正解を入力", class: "choice-input", required: true %>
@@ -31,12 +53,18 @@
       <div class="choice-label">選択肢</div>
       <%= f.text_field :wrong_answer_3, placeholder: "誤答を入力", class: "choice-input", required: true %>
     </div>
-
   </div>
 
   <div class="buttons-area">
-    <%= f.submit "保存", class: "btn btn-save" %>
-    <%= link_to "削除", "#", onclick: "window.location.reload(); return false;", class: "btn btn-delete" %>
+    <% if @new_table.new_record? %>
+      <%# 新規作成時 %>
+      <%= f.submit "保存", class: "btn btn-save" %>
+      <%= link_to "クリア", "#", onclick: "window.location.reload(); return false;", class: "btn btn-delete", style: "margin-left: 10px;" %>
+    <% else %>
+      <%# 編集時 %>
+      <%= f.submit "更新", class: "btn btn-save" %>
+      <%= link_to "削除", destroy_admin_path(@new_table.id), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-delete", style: "margin-left: 10px;" %>
+    <% end %>
   </div>
 
 <% end %>
