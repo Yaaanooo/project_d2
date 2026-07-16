@@ -6,7 +6,6 @@
     <div class="genre-select">
 
      <% @genres.each_with_index do |genre, index| %>
-
         <%= radio_button_tag :genre_id,
                              genre.id,
                              index.zero?,
@@ -39,6 +38,6 @@
     </div>
 
   <% end %>
-  
+
 
 </div>
