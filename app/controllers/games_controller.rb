@@ -101,11 +101,19 @@ end
 
 
   def result
-    # TODO: quiz画面で計算した結果（ジャンル名・正解数・問題数・コメント）を受け取るように変更する
-    @genre = "ネットワーク"
-    @score = 3
-    @total = 5
-    @comment = "よくできました！"
+    @genre = Genre.find_by(session[:genre_id])
+
+    @correct_count = session[:correct_count]
+    @question_count =session[:question_ids].length
+    if @correct_count == 5
+      @comment = "よくできました"
+    elsif @correct_count >= 3
+      @comment = "できた"
+    else
+      @comment = "へたくそ"
+    end
+
   end
 
 end
+
