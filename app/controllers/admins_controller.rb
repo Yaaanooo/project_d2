@@ -5,11 +5,12 @@ class AdminsController < ApplicationController
   end
 
   def search
-    @genres = Genre.all
-    query = params[:query]
-    @results = Question.where("body LIKE ?", "%#{query}%").where(id: params[:sGenres] || [])
-    render :list
-  end
+      @genres = Genre.all
+      query = params[:query]
+      @results = Question.where("body LIKE ?", "%#{query}%").where(genre_id: params[:sGenres] || [])
+      
+      render :list
+    end
 
   # 問題追加（初期表示）
   def new
