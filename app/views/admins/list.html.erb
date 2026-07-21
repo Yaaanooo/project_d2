@@ -4,154 +4,143 @@
   max-width: 1200px;
   margin: 0 auto;
 }
-.addBtn{
-border:2px;
-background-color: #007bff;
-text-align:center;
-color:white;
-font-size:2vw;
-border-radius: 5px;
-position: absolute;
-top: 10px;
-left: 1vw;
-width: 14vw;
-height: 5vw;
+.addBtn {
+  border: 2px;
+  background-color: #007bff;
+  text-align: center;
+  color: white;
+  font-size: 2vw;
+  border-radius: 5px;
+  position: absolute;
+  top: 10px;
+  left: 1vw;
+  width: 14vw;
+  height: 5vw;
 }
-th{
-background-color:#163E64;
-color:white;
+th {
+  background-color: #163E64;
+  color: white;
 }
-.sBtn{
-border:2px;
-background-color:#007bff;
-text-align:center;
-color:white;
-font-size:2vw;
-border-radius:5px;
-position:absolute;
-top:10px;
-left:89vw;
-width:10vw;
-height:5vw;
+.sBtn {
+  border: 2px;
+  background-color: #007bff;
+  text-align: center;
+  color: white;
+  font-size: 2vw;
+  border-radius: 5px;
+  position: absolute;
+  top: 10px;
+  left: 89vw;
+  width: 10vw;
+  height: 5vw;
 }
-.sText{
-  position:absolute;
-  top:2.5vw;
-  left:16vw;
-  width:71vw;
-  height:2.5vw;
+.sText {
+  position: absolute;
+  top: 2.5vw;
+  left: 16vw;
+  width: 71vw;
+  height: 2.5vw;
 }
-.listTable{
-  border-collapse:collapse;
-  position:absolute;
-  top:11vw;
-  left:1vw;
-  width:98vw;
+.listTable {
+  border-collapse: collapse;
+  position: absolute;
+  top: 11vw;
+  left: 1vw;
+  width: 98vw;
 }
-th,td{
-  border:1px solid #000000;
+th, td {
+  border: 1px solid #000000;
 }
-.notFound{
-  text-align:center;
+.notFound {
+  text-align: center;
 }
-._id{
-  width:7vw;
+._genre {
+  width: 10vw;
+  text-align: center; /* ← ジャンルの文字を中央揃えに追加 */
 }
-._genre{
-  width:7vw;
+._body {
+  width: 78vw;
 }
-._body{
-  width:77vw;
+._eBtn {
+  width: 10vw;
+  text-align: center; /* 編集ボタンも中央揃えに揃えています */
 }
-._eBtn{
-  width:7vw;
+
+/* --- ジャンルボタン（CSSのみで切り替え制御） --- */
+.gBtn {
+  display: none;
 }
-.gBtn{
-  position:relative;
-  top:-100vw;
-  left:-18vw;
+
+.gLabel {
+  display: block;
+  width: 7.5vw;
+  height: 3.5vw;
+  line-height: 3.5vw;
+  text-align: center;
+  background-color: #888888;
+  color: white;
+  font-size: 1.3vw;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
 }
-.layout-a{
-  position:relative;
-  top:-15px;
-  left:-18vw;
-  width:7vw;
-  height: 4vw;
-  text-align:center;
-  border:2px;
-  background-color:#888888;
-  border-radius:5px;
+
+.gLabel:hover {
+  opacity: 0.85;
 }
-.layout-b{
-  position:relative;
-  top:-15px;
-  left:-18vw;
-  width:7vw;
-  height: 4vw;
-  text-align:center;
-  border:2px;
-  background-color:#cccccc;
-  border-radius:5px;
+
+.gBtn:checked + .gLabel {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 </style>
-<%= javascript_tag do %>
-  document.addEventListener("turbo:load", ChkBoxFunc,{once:true});
-  function ChkBoxFunc() {
-  <%@genres.each do |g|%>
-    const checkbox = document.getElementById(<%=g.id%>);
-    const content = document.getElementById("gLbl");
 
-    checkbox.addEventListener("change", function() {
-      if (this.checked) {
-        content.classList.remove("layout-a");
-        content.classList.add("layout-b");
-      } else {
-        content.classList.remove("layout-b");
-        content.classList.add("layout-a");
-      }
-    },false);
-  <%end%>
-  }
-<% end %>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <div class="container">
-<a href="/admins/new"><button class="addBtn" >問題追加</button></a>
+<a href="/admins/new"><button class="addBtn">問題追加</button></a>
+
 <%= form_with url: search_path, method: :get, local: true do |f| %>
-  <div><%= f.text_field :query, placeholder: "問題文検索" , class:"sText"%></div>
-  <% @genres.each do |g|%>
-    <div style="position:absolute;top:6vw;left:calc(<%=g.id%>*19vw)">
-    <%=check_box_tag "sGenres[]",g.id,true,id: g.id,class:"gBtn"%>
-    <label for=<%=g.id%>><div id="gLbl" class="layout-b"><%=g.genre_name%></div></label>
+  <div><%= f.text_field :query, value: params[:query], placeholder: "問題文検索", class: "sText" %></div>
+  
+  <% @genres.each_with_index do |g, index| %>
+    <% 
+      is_checked = params[:commit].blank? || (params[:sGenres].present? && params[:sGenres].include?(g.id.to_s)) 
+    %>
+    <div style="position: absolute; top: 6vw; left: calc(16vw + <%= index %> * 8.5vw);">
+      <%= check_box_tag "sGenres[]", g.id, is_checked, id: "genre_#{g.id}", class: "gBtn" %>
+      <label for="genre_<%= g.id %>" class="gLabel">
+        <%= g.genre_name %>
+      </label>
     </div>
-  <%end%>
-  <div><%= f.submit "検索" , class:"sBtn" %></div>
+  <% end %>
+  
+  <div><%= f.submit "検索", class: "sBtn" %></div>
 <% end %>
 
 <table class="listTable">
 <tr>
-<th class="_id">ID</th>
 <th class="_genre">ジャンル</th>
 <th class="_body" colspan="2">問題文</th>
 </tr>
 <% if @results.present? %>
-<% @results.each do |result|%>
-<tr>
-<td class="_id"><%=result.id%></td>
-<td class="_genre"><%=Genre.find(result.genre_id).genre_name%></td>
-<td class="_body"><%=result.body%></td>
-<td class="_eBtn"><a href="/admins/new?id=<%=result.id%>">編集</a></td>
-</tr>
-<%end%>
-<%else%>
-<td colspan="3" class="notFound">該当する結果が見つかりませんでした</td>
-<%end%>
+  <% @results.each do |result| %>
+  <tr>
+  <td class="_genre"><%= Genre.find_by(id: result.genre_id)&.genre_name %></td>
+  <td class="_body"><%= result.body %></td>
+  <td class="_eBtn"><a href="/admins/new?id=<%= result.id %>">編集</a></td>
+  </tr>
+  <% end %>
+<% else %>
+  <tr>
+  <td colspan="3" class="notFound">該当する結果が見つかりませんでした</td>
+  </tr>
+<% end %>
 </table>
 </div>
 </body>
-
-<!--comment-->
-<!-- rails g model Genre genre_name:string -->
-<!-- rails g model Question genre_id:integer body:string correct_answer:string wrong_answer_1~3:string -->
