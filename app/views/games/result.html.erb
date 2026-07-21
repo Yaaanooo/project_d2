@@ -5,11 +5,11 @@
     <h1 class="result-title">クイズ結果</h1>
 
     <div class="genre-box">
-      <h2><%= @genre %></h2>
+      <h2><%= @genre.genre_name %></h2>
     </div>
 
     <div class="score-box">
-      <h2>正解数 <%= @score %> / <%= @total %></h2>
+      <h2>正解数 <%= @correct_count %> / <%= @question_count %></h2>
     </div>
 
     <div class="comment-box">
@@ -17,7 +17,7 @@
     </div>
 
     <div class="button-area">
-      <%= button_to "リトライ", game_quiz_path, method: :get, class: "result-button" %>
+      <%= button_to "リトライ", game_quiz_path, method: :post, class: "result-button" %>
       <%= button_to "トップへ", root_path, method: :get, class: "result-button" %>
     </div>
 
