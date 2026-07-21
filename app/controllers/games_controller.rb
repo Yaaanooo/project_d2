@@ -105,12 +105,17 @@ end
 
     @correct_count = session[:correct_count]
     @question_count =session[:question_ids].length
-    if @correct_count == 5
-      @comment = "よくできました"
-    elsif @correct_count >= 3
-      @comment = "できた"
+
+    @correct_rate = @correct_count.to_f / @question_count
+
+    if @correct_rate == 1.0
+      @comment = "全問正解！！素晴らしい！"
+    elsif @correct_rate >= 0.8
+      @comment = "あと少しで満点！"
+    elsif @correct_rate >= 0.6
+      @comment = "よく頑張りました！"
     else
-      @comment = "へたくそ"
+      @comment = "もう一度挑戦してみましょう"
     end
 
   end

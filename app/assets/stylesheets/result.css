@@ -3,6 +3,7 @@
 .score-box,
 .comment-box {
     border: 2px solid black;
+    border-radius: 12px;
 }
 
 
@@ -60,12 +61,12 @@
     padding: 20px;
 
     display: flex;
+    flex-direction: column;   /* ← 追加 */
     justify-content: center;
     align-items: center;
 
     box-sizing: border-box;
 }
-
 
 /* コメント文章 */
 .comment-box p {
@@ -101,7 +102,7 @@
     font-weight: bold;
 
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 12px;
 
     background-color: white;
     color: black;
@@ -123,4 +124,13 @@
 .score-box h2,
 .comment-box p {
     margin: 10px 0;
+}
+
+/* ボックスの見出し */
+.box-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #555;
+    text-transform: uppercase;
 }

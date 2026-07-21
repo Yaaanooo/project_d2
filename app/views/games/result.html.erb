@@ -5,14 +5,17 @@
     <h1 class="result-title">クイズ結果</h1>
 
     <div class="genre-box">
+      <h3 class = "box-title">ジャンル</h3>
       <h2><%= @genre.genre_name %></h2>
     </div>
 
     <div class="score-box">
-      <h2>正解数 <%= @correct_count %> / <%= @question_count %></h2>
+      <h3 class = "box-title">正解数</h3>
+      <h2> <%= @correct_count %> / <%= @question_count %></h2>
     </div>
 
     <div class="comment-box">
+    <h3 class = "box-title">コメント</h3>
       <p><%= @comment %></p>
     </div>
 
