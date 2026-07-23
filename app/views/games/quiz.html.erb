@@ -39,7 +39,7 @@
     </div>
 
     <div class="page-buttons">
-      <%= form.button "＜ 前の問題",
+      <%= form.button "◄ 前の問題",
           type: "submit",
           formaction: game_back_path,
           formmethod: "post",
@@ -47,9 +47,9 @@
           class: "page-button #{"hidden-button" if @question_number == 1}" %>
 
       <% if @question_number == session[:question_ids].length %>
-        <%= form.button "結果へ ＞", type: "submit", class: "page-button" %>
+        <%= form.button "結果へ ►", type: "submit", class: "page-button" %>
       <% else %>
-        <%= form.button "次の問題 ＞", type: "submit", class: "page-button" %>
+        <%= form.button "次の問題 ►", type: "submit", class: "page-button" %>
       <% end %>
     </div>
 
