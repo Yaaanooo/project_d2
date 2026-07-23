@@ -281,3 +281,123 @@
 
     transform: scale(-1, 1) rotate(0);
 }
+
+/* ==================================================
+   クイズ詳細画面 (details.html.erb) のスタイル
+================================================== */
+.details-page {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: #f7f9fc;
+  min-height: 100vh;
+}
+
+.details-container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+.details-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* 各問題のカードデザイン（縦並びを強制） */
+.result-item {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* ヘッダー部分（左右配置） */
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #ccc;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 問題文や解答の縦並びとテキスト設定 */
+.question-body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.question-body .label {
+  font-weight: bold;
+  color: #333;
+  margin: 10px 0 0 0;
+  font-size: 14px;
+}
+
+.question-body .text {
+  margin: 0;
+  font-size: 16px;
+  color: #444;
+  line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* --- 正解の場合の色分け --- */
+.result-item.correct {
+  border-color: #4caf50;
+  background-color: #e8f5e9;
+}
+.result-item.correct .judgment {
+  color: #2e7d32;
+}
+
+/* --- 不正解の場合の色分け --- */
+.result-item.incorrect {
+  border-color: #f44336;
+  background-color: #ffebee;
+}
+.result-item.incorrect .judgment {
+  color: #c62828;
+}
+
+/* 戻るボタンのスタイル */
+.back-button {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  padding: 12px 0;
+  background-color: #6c757d;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  transition: background-color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #5a6268;
+}

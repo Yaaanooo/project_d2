@@ -46,6 +46,9 @@ Rails.application.routes.draw do
   # 問題ジャンプボタン
   post "games/jump", to: "games#jump", as: :game_jump
 
+  # 詳細表示
+  get 'games/details', to: 'games#details', as: 'games_details'
+
 
   # ==========================================
   # その他（Rails標準）

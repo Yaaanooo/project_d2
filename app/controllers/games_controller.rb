@@ -208,5 +208,44 @@ class GamesController < ApplicationController
     redirect_to game_quiz_path
   end
 
+
+  # 詳細表示
+  def details
+    question_ids = session[:question_ids] || []
+    answers = session[:answers] || {}
+    choice_orders = session[:choice_orders] || {}
+
+    @quiz_results = []
+
+    question_ids.each_with_index do |question_id, index|
+      question = Question.find_by(id: question_id)
+      next unless question
+
+      # ユーザーの選択インデックスと表示順
+      selected_index = answers[question.id.to_s]
+      order = choice_orders[question.id.to_s]
+      next unless order
+
+      # 選択肢の復元
+      original_choices = [question.correct_answer, question.wrong_answer_1, question.wrong_answer_2, question.wrong_answer_3]
+      displayed_choices = order.map { |i| original_choices[i] }
+
+      # ユーザーの解答と正誤判定
+      user_answer = selected_index ? displayed_choices[selected_index.to_i] : "未回答"
+      is_correct = (user_answer == question.correct_answer)
+
+      # 画面表示用にデータをまとめる
+      @quiz_results << {
+        number: index + 1,
+        question_text: question.body,
+        user_answer: user_answer,
+        correct_answer: question.correct_answer,
+        is_correct: is_correct
+      }
+    end
+  end
+
+
+
 end
 
