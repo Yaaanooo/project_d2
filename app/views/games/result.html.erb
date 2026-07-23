@@ -1,28 +1,38 @@
+<!-- ==================================================
+     クイズ結果画面
+=================================================== -->
+
 <div class="result-page">
 
   <div class="result-container">
 
+    <!-- タイトル -->
     <h1 class="result-title">クイズ結果</h1>
 
+    <!-- ジャンル -->
     <div class="genre-box">
-      <h3 class = "box-title">ジャンル</h3>
-      <h2><%= @genre.genre_name %></h2>
+      <h3 class="box-title">ジャンル</h3>
+      <h2><%= @genres.map(&:genre_name).join("・") %></h2>
     </div>
 
+    <!-- 正解数 -->
     <div class="score-box">
-      <h3 class = "box-title">正解数</h3>
-      <h2> <%= @correct_count %> / <%= @question_count %></h2>
+      <h3 class="box-title">正解数</h3>
+      <h2><%= @correct_count %> / <%= @question_count %></h2>
     </div>
 
+    <!-- コメント -->
     <div class="comment-box">
-    <h3 class = "box-title">コメント</h3>
+      <h3 class="box-title">コメント</h3>
       <p><%= @comment %></p>
     </div>
 
+    <!-- ボタン -->
     <div class="button-area">
-      <%= button_to "リトライ",games_retry_path,method: :post, class: "result-button" %>
+      <%= button_to "リトライ", games_retry_path, method: :post, class: "result-button" %>
       <%= button_to "トップへ", root_path, method: :get, class: "result-button" %>
     </div>
 
   </div>
+
 </div>
