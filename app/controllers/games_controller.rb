@@ -14,25 +14,19 @@ class GamesController < ApplicationController
       return
     end
 
+    session[:genre_id] = genre_id
     session[:question_ids] = questions.map(&:id)
     session[:question_index] = 0
     session[:correct_count] = 0
-    session[:answers] = {}
 
-    session[:choices] = {}
+    session[:choice_orders] = {}
 
     questions.each do |question|
-      session[:choices][question.id.to_s] = [
-        question.correct_answer,
-        question.wrong_answer_1,
-        question.wrong_answer_2,
-        question.wrong_answer_3
-      ].shuffle
+      session[:choice_orders][question.id.to_s] = [0, 1, 2, 3].shuffle
     end
 
     redirect_to game_quiz_path
-  end
-
+    end
 
 
   # クイズ画面
@@ -42,12 +36,15 @@ class GamesController < ApplicationController
       return
     end
 
-    if session[:question_index] >= session[:question_ids].length
+    question_ids = session[:question_ids] || []
+    question_index = session[:question_index].to_i
+
+    if question_index >= question_ids.length
       redirect_to games_result_path
       return
     end
 
-    question_id = session[:question_ids][session[:question_index]]
+    question_id = question_ids[question_index]
     @question = Question.find_by(id: question_id)
 
     unless @question
@@ -55,10 +52,18 @@ class GamesController < ApplicationController
       return
     end
 
-    @question_number = session[:question_index] + 1
+    @question_number = question_index + 1
 
-    @choices = session[:choices][@question.id.to_s]
+    choices = [
+      @question.correct_answer,
+      @question.wrong_answer_1,
+      @question.wrong_answer_2,
+      @question.wrong_answer_3
+    ]
 
+    order = session[:choice_orders][@question.id.to_s]
+
+    @choices = order.map { |index| choices[index] }
   end
 
   # 次へボタン
