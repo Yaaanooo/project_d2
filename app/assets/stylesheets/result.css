@@ -3,7 +3,7 @@
 =================================================== */
 
 /* ==================================================
-   共通（各ボックス）
+   共通（ジャンル・正解数・コメント）
 =================================================== */
 .genre-box,
 .score-box,
@@ -86,7 +86,6 @@
     box-sizing: border-box;
 }
 
-
 /* コメント文章 */
 .comment-box p {
     margin: 10px 0;
@@ -97,7 +96,7 @@
 
 
 /* ==================================================
-   ボックスの見出し
+   ボックス見出し
 =================================================== */
 .box-title {
     font-size: 18px;
@@ -121,8 +120,7 @@
     margin-top: 20px;
 }
 
-
-/* ボタンと犬をまとめる */
+/* ボタン・犬・吹き出しをまとめる */
 .button-wrapper {
     position: relative;
     display: inline-block;
@@ -147,12 +145,11 @@
     border-radius: 12px;
 
     cursor: pointer;
-    transition: 0.3s;
+    transition: .3s;
 
     position: relative;
-    z-index: 2; /* 犬より前に表示 */
+    z-index: 2;
 }
-
 
 /* ボタンホバー */
 .result-button:hover {
@@ -162,46 +159,87 @@
 
 
 /* ==================================================
-   犬（共通）
+   はちはれ（共通）
 =================================================== */
-
-/* 疑似要素で犬の画像を表示 */
 .button-wrapper::after {
     content: "";
 
-    width: 70px;
-    height: 70px;
+    width: 120px;
+    height: 120px;
 
     position: absolute;
 
-    background: url("dog.png") center / contain no-repeat;
+    background: url("hatihare.png") center / contain no-repeat;
 
-    opacity: 0;             /* 初期状態では非表示 */
-    z-index: 1;             /* ボタンより後ろ */
-    pointer-events: none;   /* 犬にマウス判定を持たせない */
+    opacity: 0;
 
-    transition: all .3s cubic-bezier(.2, 1, .66, 1);
+    z-index: 1;
+    pointer-events: none;
+
+    transition: all .3s cubic-bezier(.2,1,.66,1);
+}
+
+
+/* ==================================================
+   吹き出し（共通）
+=================================================== */
+.speech-bubble {
+    position: absolute;
+    display: block;
+
+    padding: 18px 24px;
+
+    border: 2px solid #333;
+    background: white;
+
+    width: fit-content;
+
+    white-space: nowrap;
+    text-align: center;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    opacity: 0;
+
+    transition: .3s;
+
+    z-index: 3;
+    pointer-events: none;
 }
 
 
 /* ==================================================
    リトライボタン
-   （犬が左からひょっこり）
 =================================================== */
 
-/* 初期位置 */
+/* 吹き出し */
+.retry-bubble {
+    left: -180px;
+    top: 15px;
+
+    /* 右上を尖らせる */
+    border-radius: 50% 0 50% 50%;
+}
+
+/* 犬（初期位置） */
 .retry-wrapper::after {
-    left: -10px;
-    bottom: 8px;
+    left: -35px;
+    bottom: 5px;
 
     transform: scale(.8) rotate(25deg);
 }
 
-/* ホバー時 */
+/* ホバー時：吹き出し表示 */
+.retry-wrapper:hover .retry-bubble {
+    opacity: 1;
+}
+
+/* ホバー時：犬が左からひょっこり */
 .retry-wrapper:hover::after {
     opacity: 1;
 
-    left: -35px;
+    left: -80px;
     bottom: 0;
 
     transform: scale(1) rotate(0);
@@ -210,22 +248,35 @@
 
 /* ==================================================
    トップへボタン
-   （犬が右からひょっこり）
 =================================================== */
 
-/* 初期位置 */
+/* 吹き出し */
+.top-bubble {
+    right: -195px;
+    top: 15px;
+
+    /* 左上を尖らせる */
+    border-radius: 0 50% 50% 50%;
+}
+
+/* 犬（初期位置） */
 .top-wrapper::after {
-    right: -10px;
-    bottom: 8px;
+    right: -35px;
+    bottom: 5px;
 
     transform: scale(-.8, .8) rotate(25deg);
 }
 
-/* ホバー時 */
+/* ホバー時：吹き出し表示 */
+.top-wrapper:hover .top-bubble {
+    opacity: 1;
+}
+
+/* ホバー時：犬が右からひょっこり */
 .top-wrapper:hover::after {
     opacity: 1;
 
-    right: -35px;
+    right: -80px;
     bottom: 0;
 
     transform: scale(-1, 1) rotate(0);
