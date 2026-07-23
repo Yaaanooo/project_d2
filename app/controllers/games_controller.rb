@@ -5,17 +5,21 @@ class GamesController < ApplicationController
 
   # スタートボタン
   def start
-    genre_id = params[:genre_id]
+    genre_ids = params[:genre_ids]
+    if genre_ids.blank?
+      redirect_to root_path, alert: "ジャンルを1つ以上選択してください"
+      return
+    end
     question_count = params[:question_count].to_i
 
-    questions = Question.where(genre_id: genre_id).sample(question_count)
+    questions = Question.where(genre_id: genre_ids).sample(question_count)
 
     if questions.empty?
       redirect_to root_path, alert: "問題が登録されていません"
       return
     end
 
-    session[:genre_id] = genre_id
+    session[:genre_ids] = genre_ids
     session[:question_count] = question_count
     session[:question_ids] = questions.map(&:id)
     session[:question_index] = 0
@@ -28,7 +32,7 @@ class GamesController < ApplicationController
     end
 
     redirect_to game_quiz_path
-end
+  end
 
 
   # クイズ画面
@@ -53,12 +57,7 @@ end
 
     @question_number = session[:question_index] + 1
 
-    choices = [
-      @question.correct_answer,
-      @question.wrong_answer_1,
-      @question.wrong_answer_2,
-      @question.wrong_answer_3
-    ]
+    choices = [@question.correct_answer, @question.wrong_answer_1, @question.wrong_answer_2, @question.wrong_answer_3]
 
     order = session[:choice_orders][@question.id.to_s]
     @choices = order.map { |index| choices[index] }
@@ -86,12 +85,7 @@ end
 
     order = session[:choice_orders][question.id.to_s]
 
-    original_choices = [
-      question.correct_answer,
-      question.wrong_answer_1,
-      question.wrong_answer_2,
-      question.wrong_answer_3
-    ]
+    original_choices = [question.correct_answer, question.wrong_answer_1, question.wrong_answer_2, question.wrong_answer_3]
 
     displayed_choices = order.map { |index| original_choices[index] }
     user_answer = displayed_choices[selected_index]
@@ -149,7 +143,7 @@ end
 
     session[:correct_count] = correct_count
 
-    @genre = Genre.find_by(id: session[:genre_id])
+    @genres = Genre.where(id: session[:genre_ids])
     @correct_count = session[:correct_count]
     @question_count = session[:question_ids].length
     @correct_rate = @correct_count.to_f / @question_count
@@ -167,10 +161,10 @@ end
 
   def retry
     session[:answers] = {}
-    genre_id = session[:genre_id]
+    genre_ids = session[:genre_ids]
     question_count = session[:question_count]
 
-    questions = Question.where(genre_id: genre_id).sample(question_count)
+    questions = Question.where(genre_id: genre_ids).sample(question_count)
 
     if questions.empty?
       redirect_to root_path, alert: "問題が登録されていません"
@@ -186,8 +180,8 @@ end
     questions.each do |question|
       session[:choice_orders][question.id.to_s] = [0, 1, 2, 3].shuffle
     end
-
     redirect_to game_quiz_path
   end
+
 end
 
