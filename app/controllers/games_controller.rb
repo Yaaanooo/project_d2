@@ -19,6 +19,7 @@ class GamesController < ApplicationController
       return
     end
 
+    session[:max_question_index] = 0
     session[:genre_ids] = genre_ids
     session[:question_count] = question_count
     session[:question_ids] = questions.map(&:id)
@@ -37,8 +38,8 @@ class GamesController < ApplicationController
 
   # クイズ画面
   def quiz
-    if Question.count.zero?
-      redirect_to root_path, alert: "問題が登録されていません"
+    unless session[:question_ids].present?
+      redirect_to root_path, alert: "クイズを開始してください"
       return
     end
 
@@ -56,14 +57,44 @@ class GamesController < ApplicationController
     end
 
     @question_number = session[:question_index] + 1
+    @question_count = session[:question_ids].length
 
     choices = [@question.correct_answer, @question.wrong_answer_1, @question.wrong_answer_2, @question.wrong_answer_3]
 
     order = session[:choice_orders][@question.id.to_s]
     @choices = order.map { |index| choices[index] }
 
-    @selected_answer_index =
-      session[:answers]&.[](@question.id.to_s)
+    @selected_answer_index = session[:answers]&.[](@question.id.to_s)
+  end
+
+
+  # キャンセルボタン
+  def cancel
+    session.delete(:genre_ids)
+    session.delete(:question_count)
+    session.delete(:question_ids)
+    session.delete(:question_index)
+    session.delete(:max_question_index)
+    session.delete(:correct_count)
+    session.delete(:answers)
+    session.delete(:choice_orders)
+
+    redirect_to games_top_path
+  end
+
+  # 問題ジャンプボタン
+  def jump
+    index = params[:index].to_i
+    max_index = session[:max_question_index] || 0
+
+    if index >= 0 &&
+      index <= max_index &&
+      index < session[:question_ids].length
+
+      session[:question_index] = index
+    end
+
+    redirect_to game_quiz_path
   end
 
 
@@ -83,18 +114,12 @@ class GamesController < ApplicationController
     session[:answers] ||= {}
     session[:answers][question.id.to_s] = selected_index
 
-    order = session[:choice_orders][question.id.to_s]
-
-    original_choices = [question.correct_answer, question.wrong_answer_1, question.wrong_answer_2, question.wrong_answer_3]
-
-    displayed_choices = order.map { |index| original_choices[index] }
-    user_answer = displayed_choices[selected_index]
-
-    if user_answer == question.correct_answer
-      session[:correct_count] += 1
-    end
-
     session[:question_index] += 1
+
+    session[:max_question_index] = [
+      session[:max_question_index] || 0,
+      session[:question_index]
+    ].max
 
     if session[:question_index] >= session[:question_ids].length
       redirect_to games_result_path
@@ -173,8 +198,8 @@ class GamesController < ApplicationController
 
     session[:question_ids] = questions.map(&:id)
     session[:question_index] = 0
+    session[:max_question_index] = 0
     session[:correct_count] = 0
-
     session[:choice_orders] = {}
 
     questions.each do |question|

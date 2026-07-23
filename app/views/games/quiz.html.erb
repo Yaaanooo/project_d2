@@ -1,4 +1,44 @@
 <div class="quiz-container">
+  <div class="cancel-area">
+    <%= button_to "中断", game_cancel_path, method: :post, form: {data: {turbo_confirm: "クイズを中断しますか？"}}, class: "cancel-button" %>
+  </div>
+  
+  <div class="quiz-progress">
+    <div class="progress-text">
+      <%= @question_number %> / <%= @question_count %> 問
+    </div>
+
+    <div class="progress-segments">
+      <% @question_count.times do |index| %>
+        <% question_id = session[:question_ids][index] %>
+        <% answered = session[:answers]&.key?(question_id.to_s) %>
+        <% current = index == @question_number - 1 %>
+        <% clickable = index <= (session[:max_question_index] || 0) %>
+
+        <% classes = [
+          "progress-segment",
+          ("completed" if answered),
+          ("current" if current),
+          ("clickable" if clickable)
+        ].compact.join(" ") %>
+
+        <% if clickable %>
+          <%= button_to "",
+              game_jump_path(index: index),
+              method: :post,
+              class: classes,
+              title: "問#{index + 1}へ移動",
+              aria: { label: "問#{index + 1}へ移動" },
+              form_class: "progress-form" %>
+        <% else %>
+          <div
+            class="<%= classes %>"
+            title="問<%= index + 1 %>"
+          ></div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
   <div class="question-text">
     <div class="question-head">
