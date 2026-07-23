@@ -27,17 +27,27 @@
       <p><%= @comment %></p>
     </div>
 
-    <!-- ボタン -->
+    <!-- ==================================================
+         ボタンエリア
+    =================================================== -->
     <div class="button-area">
-      <%= button_to "リトライ",
-                    games_retry_path,
-                    method: :post,
-                    class: "result-button" %>
 
-      <%= button_to "トップへ",
-                    root_path,
-                    method: :get,
-                    class: "result-button" %>
+      <!-- リトライボタン（犬が左からひょっこり） -->
+      <div class="button-wrapper retry-wrapper">
+        <%= button_to "リトライ",
+                      games_retry_path,
+                      method: :post,
+                      class: "result-button" %>
+      </div>
+
+      <!-- トップへボタン（犬が右からひょっこり） -->
+      <div class="button-wrapper top-wrapper">
+        <%= button_to "トップへ",
+                      root_path,
+                      method: :get,
+                      class: "result-button" %>
+      </div>
+
     </div>
 
   </div>
