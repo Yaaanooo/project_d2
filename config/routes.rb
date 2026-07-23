@@ -40,6 +40,12 @@ Rails.application.routes.draw do
   post "games/next", to: "games#next", as: :game_next
   post "games/back", to: "games#back", as: :game_back
 
+  # キャンセルボタン
+  post "games/cancel", to: "games#cancel", as: :game_cancel
+
+  # 問題ジャンプボタン
+  post "games/jump", to: "games#jump", as: :game_jump
+
 
   # ==========================================
   # その他（Rails標準）
