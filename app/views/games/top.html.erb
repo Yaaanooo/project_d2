@@ -7,7 +7,7 @@
 
      <% @genres.each_with_index do |genre, index| %>
 
-        <%= radio_button_tag :genre_id,
+        <%= check_box_tag "genre_ids[]",
                              genre.id,
                              index.zero?,
                              class: "genre-radio",
@@ -32,7 +32,6 @@
         <%= label_tag :question_count_20, "20問", class: "question-button" %>
 
     </div>
-
 
     <div class="start-button">
       <%= submit_tag "スタート" %>
