@@ -15,6 +15,7 @@ class GamesController < ApplicationController
     end
 
     session[:genre_id] = genre_id
+    session[:question_count] = question_count
     session[:question_ids] = questions.map(&:id)
     session[:question_index] = 0
     session[:correct_count] = 0
@@ -102,11 +103,32 @@ class GamesController < ApplicationController
     redirect_to game_quiz_path
 end
 
+def retry
+  genre_id = session[:genre_id]
+  question_count = session[:question_count]
 
+  questions = Question.where(genre_id: genre_id).sample(question_count)
 
+  if questions.empty?
+    redirect_to root_path, alert: "問題が登録されていません"
+    return
+  end
+
+  session[:question_ids] = questions.map(&:id)
+  session[:question_index] = 0
+  session[:correct_count] = 0
+
+  session[:choice_orders] = {}
+
+  questions.each do |question|
+    session[:choice_orders][question.id.to_s] = [0, 1, 2, 3].shuffle
+  end
+
+  redirect_to game_quiz_path
+end
 
   def result
-    @genre = Genre.find_by(session[:genre_id])
+    @genre = Genre.find_by(id: session[:genre_id])
 
     @correct_count = session[:correct_count]
     @question_count =session[:question_ids].length

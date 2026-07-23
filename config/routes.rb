@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   #ゲームスタート
   post 'games/start', to: 'games#start', as: 'game_start'
 
+  # リトライ
+  post 'games/retry', to: 'games#retry', as: 'games_retry'
+
   get "games/top"
   get "games/quiz", to: "games#quiz", as: :game_quiz
   get 'games/result'
