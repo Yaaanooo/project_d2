@@ -5,7 +5,6 @@ class GamesController < ApplicationController
 
   # スタートボタン
   def start
-    session[:answers] = {}
     genre_id = params[:genre_id]
     question_count = params[:question_count].to_i
 
@@ -17,10 +16,11 @@ class GamesController < ApplicationController
     end
 
     session[:genre_id] = genre_id
+    session[:question_count] = question_count
     session[:question_ids] = questions.map(&:id)
     session[:question_index] = 0
     session[:correct_count] = 0
-
+    session[:answers] = {}
     session[:choice_orders] = {}
 
     questions.each do |question|
@@ -28,7 +28,7 @@ class GamesController < ApplicationController
     end
 
     redirect_to game_quiz_path
-    end
+end
 
 
   # クイズ画面
@@ -165,7 +165,8 @@ class GamesController < ApplicationController
     end
   end
 
-    def retry
+  def retry
+    session[:answers] = {}
     genre_id = session[:genre_id]
     question_count = session[:question_count]
 
