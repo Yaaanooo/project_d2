@@ -1,3 +1,8 @@
+/* ==================================================
+   クイズ結果画面
+=================================================== */
+
+
 /* 共通 */
 .genre-box,
 .score-box,
@@ -41,7 +46,6 @@
     width: 70%;
     margin: 20px auto;
     padding: 15px 0;
-    font-size: 24px;
 }
 
 
@@ -49,7 +53,7 @@
 .score-box {
     width: 40%;
     margin: 20px auto;
-    padding: 10px 0;
+    padding: 15px 0;
 }
 
 
@@ -69,6 +73,7 @@
     box-sizing: border-box;
 }
 
+
 /* コメント文章 */
 .comment-box p {
     margin: 10px 0;
@@ -77,8 +82,19 @@
     line-height: 1.6;
 
     word-break: break-word;
-    font-size: 30px;
 }
+
+
+/* ボックスの見出し */
+.box-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+
+    color: #555;
+    text-transform: uppercase;
+}
+
 
 /* ボタンエリア */
 .button-area {
@@ -89,13 +105,13 @@
 }
 
 
-/* ボタンのフォーム設定 */
+/* ボタンフォーム */
 .button-area form {
     display: inline-block;
 }
 
 
-/* 結果画面ボタン共通 */
+/* ボタン共通 */
 .result-button {
     width: 220px;
     height: 70px;
@@ -103,13 +119,12 @@
     font-size: 24px;
     font-weight: bold;
 
-    cursor: pointer;
-    border-radius: 12px;
-
     background-color: white;
     color: black;
     border: 2px solid black;
+    border-radius: 12px;
 
+    cursor: pointer;
     transition: 0.2s;
 }
 
@@ -121,18 +136,9 @@
 }
 
 
-/* 文字の余白 */
+/* ボックス内の文字余白 */
 .genre-box h2,
 .score-box h2,
 .comment-box p {
     margin: 10px 0;
-}
-
-/* ボックスの見出し */
-.box-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 10px 0;
-    color: #555;
-    text-transform: uppercase;
 }
