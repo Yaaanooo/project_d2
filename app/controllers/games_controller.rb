@@ -164,5 +164,29 @@ class GamesController < ApplicationController
       @comment = "もう一度挑戦してみましょう"
     end
   end
+
+    def retry
+    genre_id = session[:genre_id]
+    question_count = session[:question_count]
+
+    questions = Question.where(genre_id: genre_id).sample(question_count)
+
+    if questions.empty?
+      redirect_to root_path, alert: "問題が登録されていません"
+      return
+    end
+
+    session[:question_ids] = questions.map(&:id)
+    session[:question_index] = 0
+    session[:correct_count] = 0
+
+    session[:choice_orders] = {}
+
+    questions.each do |question|
+      session[:choice_orders][question.id.to_s] = [0, 1, 2, 3].shuffle
+    end
+
+    redirect_to game_quiz_path
+  end
 end
 
