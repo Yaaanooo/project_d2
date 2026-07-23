@@ -51,4 +51,7 @@ Rails.application.routes.draw do
   # その他（Rails標準）
   # ==========================================
   get "up" => "rails/health#show", as: :rails_health_check
+
+  # 詳細
+  get 'games/details', to: 'games#details', as: 'games_details'
 end
