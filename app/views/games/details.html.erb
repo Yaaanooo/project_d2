@@ -1,0 +1,34 @@
+<div class="details-page">
+  <div class="details-container">
+    <h1 class="details-title">解答詳細</h1>
+
+    <div class="results-list">
+      <% @quiz_results.each do |result| %>
+        <!-- 正解なら 'correct'、不正解なら 'incorrect' のクラスが付く -->
+        <div class="result-item <%= result[:is_correct] ? 'correct' : 'incorrect' %>">
+          
+          <div class="question-header">
+            <span class="question-number">第<%= result[:number] %>問</span>
+            <span class="judgment"><%= result[:is_correct] ? "正解" : "不正解" %></span>
+          </div>
+          
+          <div class="question-body">
+            <p class="label">問題</p>
+            <p class="text"><%= result[:question_text] %></p>
+            
+            <p class="label">あなたの解答</p>
+            <p class="text"><%= result[:user_answer] %></p>
+            
+            <p class="label">正解</p>
+            <p class="text"><%= result[:correct_answer] %></p>
+          </div>
+
+        </div>
+      <% end %>
+    </div>
+
+    <div class="button-area">
+      <%= link_to "結果画面に戻る", games_result_path, class: "back-button" %>
+    </div>
+  </div>
+</div>
