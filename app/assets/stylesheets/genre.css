@@ -1,29 +1,45 @@
 .genre-form {
-  width: 400px;
+  width: 600px; /* フォームを広く */
   margin: 50px auto;
   text-align: center;
 }
 
 .genre-field {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .genre-field label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
   font-weight: bold;
+  font-size: 24px; /* ラベルを大きく */
 }
 
 .genre-field input {
   width: 100%;
-  padding: 8px;
+  padding: 15px; /* 入力欄を大きく */
+  font-size: 20px;
   box-sizing: border-box;
+  border: 2px solid #999;
+  border-radius: 8px;
 }
 
 .genre-submit {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .genre-submit input {
-  padding: 8px 30px;
+  width: 250px;
+  padding: 15px 0;
+  font-size: 22px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+}
+
+.genre-submit input:hover {
+  background-color: #2980b9;
 }
