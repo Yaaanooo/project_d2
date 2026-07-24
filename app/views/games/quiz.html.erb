@@ -31,10 +31,7 @@
               aria: { label: "問#{index + 1}へ移動" },
               form_class: "progress-form" %>
         <% else %>
-          <div
-            class="<%= classes %>"
-            title="問<%= index + 1 %>"
-          ></div>
+          <div class="<%= classes %>" title="問<%= index + 1 %>"></div>
         <% end %>
       <% end %>
     </div>
@@ -44,11 +41,11 @@
     <div class="question-head">
 
       <div class="number-text">
-        問<%= @question_number %>
+        <strong>問<%= @question_number %></strong>
       </div>
 
       <div class="genre-text">
-        <%= @question&.genre&.genre_name || "ジャンル名" %>
+        <strong><%= @question&.genre&.genre_name || "ジャンル名" %></strong>
       </div>
 
     </div>

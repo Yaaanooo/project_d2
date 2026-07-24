@@ -126,11 +126,24 @@
 }
 
 .start-button input {
-  padding: 12px 50px;
-  font-size: 18px;
+  width: 260px;
+  padding: 15px 0;
+
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+
+  background-color: #007bff;
+  border: none;
+  border-radius: 12px;
+
   cursor: pointer;
+  transition: 0.2s;
 }
 
+.start-button input:hover {
+  background-color: #006fe6;
+}
 
 .alert-message {
   background: #ffe5e5;
